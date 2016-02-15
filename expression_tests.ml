@@ -10,8 +10,8 @@ let test () =
   assert (not (contains_var (parse "ln(4/(8^2)")));
   assert (contains_var (parse "4^(4*~x"));
 
-  assert (evaluate (parse "x^4 + 3") 2.0 = 19.0);
-  assert ((evaluate (parse "x+3") 8.4) = 11.4);
+  assert ((evaluate (parse "x^4 + 3") 2.0) = 19.0);
+  assert ((evaluate (parse "x-3") 8.4) = 5.4);
   assert ((evaluate (parse "2") 3) = 2.);
   assert (evaluate (parse "3^2+~sin(cos(x))") 3.14159) > 9.84 &&
     (evaluate (parse "3^2+~sin(cos(x))") 3.14159) < 9.85 );
@@ -19,7 +19,11 @@ let test () =
     (evaluate (parse "ln(4/(8^(2/x)))") 10.) < .98);
   assert ((evaluate (parse "4^(4*~x") .2) > .32 &&
     (evaluate (parse "4^(4*~x") .2) < .33);
-    
+
+  assert ((to_string_smart (derivative (parse "x^4 + 3")) = 4*x^3);
+
+
+
 ;;
 
 test();;
