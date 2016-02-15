@@ -20,10 +20,15 @@ let test () =
   assert ((evaluate (parse "4^(4*~x") .2) > .32 &&
     (evaluate (parse "4^(4*~x") .2) < .33);
 
-  assert ((to_string_smart (derivative (parse "x^4 + 3")) = 4*x^3);
+  assert ((to_string_smart (derivative (parse "x^4 + 3")) = 4.*x^3.);
+  assert ((to_string_smart (derivative (parse "~sin(x) + cos(2*x)")) = 
+  	~cos(x) + ~sin(2.*x)*2.);
+  assert ((to_string_smart (derivative (parse "ln(x - 8)")) = 1./x);
+  assert ((to_string_smart (derivative (parse "-100")) = 0.);
+  assert ((to_string_smart (derivative (parse "3^x")) = 3.^x*(1*ln(3)+0.*3./3.);
 
-
-
+  assert ((find_zero parse("x^2-6*x-16") 7. 5) > 7.99 &&
+    (find_zero parse("x^2-6*x-16") 7. 5) < 8.01);
 ;;
 
 test();;
