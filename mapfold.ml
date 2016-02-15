@@ -172,9 +172,9 @@ type student = name * year
 let filter_by_year (slist:student list) (yr:year) : name list =
   let filteredlist : student list = 
   List.filter (fun x -> 
-  match x with (a, b) -> if b = yr then true else false) slist
+  match x with (_, b) -> if b = yr then true else false) slist
 in
-  List.map (fun x -> match x with (a, b) -> a) filteredlist
+  List.map (fun x -> match x with (a, _) -> a) filteredlist
 ;;
 
 
