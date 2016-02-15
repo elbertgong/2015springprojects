@@ -66,14 +66,14 @@ let rec derivative (e:expression) : expression =
         | Mul -> Binop(Add,Binop(Mul,e1,derivative e2),
                         Binop(Mul,derivative e1,e2))
         | Div -> Binop(Div, Binop(Sub, Binop(Mul, derivative e1, e2), 
-            Binop(Mul, e1, derivative e2)), Binop(Pow, e2, 2.))
+            Binop(Mul, e1, derivative e2)), Binop(Pow, e2, Num 2.))
         | Pow ->
             if contains_var e2
             then Binop(Mul, Binop(Pow, e1, e2), 
               Binop(Sum, Binop(Mul, derivative e2, Unop(Ln, e1)),
               Binop(Div, Binop(Mul, derivative e1, e2), e1)))
             else Binop(Mul, Binop(Mul, e2, derivative e1), 
-                Binop(Pow, e1, Binop(Sub, h, 1.)))
+                Binop(Pow, e1, Binop(Sub, h, Num 1.)))
 ;;
 
 (* A helpful function for testing. See the writeup. *)
