@@ -4,11 +4,11 @@ let test () =
   assert ((negate_all []) = []);
   assert ((negate_all [1; -2; 0]) = [-1; 2; 0]);
 
-  assert ((sums []) = 0);
-  assert ((sums [3; 8; -12]) = -1);
+  assert ((sum []) = 0);
+  assert ((sum [3; 8; -12]) = -1);
 
   assert ((sum_rows [[1; 2]; [3; 4]; [5; -4]]) = [3; 7; 1]);
-  assert ((sum_rows [[1; 2; 4]; []; [8; -12]]) = [7; 0; -1]);
+  assert ((sum_rows [[1; 2; 4]; []; [8; -12]]) = [7; 0; -4]);
 
   assert ((filter_odd [1; 4; 5; -3]) = [1; 5; -3]);
   assert ((filter_odd [2; 4; 8]) = []);
@@ -34,13 +34,13 @@ let test () =
     [true; false]);
 
   assert ((some_sum [None; Some 1; Some 4; Some 9]) = 14);
-  assert ((some_sum [Some -2; Some 7; None; Some 8]) = 13);
+  assert ((some_sum [Some 2; Some 7; None; Some 8]) = 17);
 
   assert ((mult_odds [1;3;0;2;-5]) = -15);
   assert ((mult_odds [2; 0; -4]) = 1);
 
   assert ((concat [[1; 2; 3]; []; [4]; [5; 6]]) = [1; 2; 3; 4; 5; 6]);
-  assert ((concat [['h'; 'e']; ['l']; ['l'; 'o']) = 
+  assert ((concat [['h'; 'e']; ['l']; ['l'; 'o']]) = 
     ['h'; 'e'; 'l'; 'l'; 'o']);
 
   assert ((filter_by_year [("Joe",2010);("Bob",2010);("Tom",2013)]
