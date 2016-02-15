@@ -15,9 +15,9 @@ open ExpressionLibrary ;;
 let rec contains_var (e:expression) : bool =
     match e with
     | Var -> true
-    | Binop (a, b, c) -> contains_var b || contains_var c
-    | Unop (a, b) -> contains_var b
-    | Num a -> false
+    | Binop (_, b, c) -> contains_var b || contains_var c
+    | Unop (_, b) -> contains_var b
+    | Num _ -> false
 ;;
 
 

@@ -1,10 +1,10 @@
-all: ps1 ps1_tests
+all: mapfold expression
 
-ps1: ps1.ml
-	ocamlbuild ps1.byte
+mapfold: mapfold.ml
+	ocamlbuild mapfold.byte
 
-ps1_tests: ps1_tests.ml
-	ocamlbuild ps1_tests.byte
+expression: expression.ml
+	ocamlbuild expression.byte
 
 clean:
 	rm -rf _build *.byte
