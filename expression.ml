@@ -73,7 +73,7 @@ let rec derivative (e:expression) : expression =
               Binop(Add, Binop(Mul, derivative e2, Unop(Ln, e1)),
               Binop(Div, Binop(Mul, derivative e1, e2), e1)))
             else Binop(Mul, Binop(Mul, e2, derivative e1), 
-                Binop(Pow, e1, Binop(Sub, h, Num 1.)))
+                Binop(Pow, e1, Binop(Sub, e2, Num 1.)))
 ;;
 
 (* A helpful function for testing. See the writeup. *)
