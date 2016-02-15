@@ -32,17 +32,17 @@ let rec evaluate (e:expression) (x:float) : float =
     | Num f -> f
     | Unop (u, e1) ->
       (match u with
-      | Sin -> sin (evaluate e1)
-      | Cos -> cos (evaluate e1)
-      | Ln -> log (evaluate e1)
-      | Neg -> -(evaluate e1))
+      | Sin -> sin (evaluate e1 x)
+      | Cos -> cos (evaluate e1 x)
+      | Ln -> log (evaluate e1 x)
+      | Neg -> -(evaluate e1 x))
     | Binop (b, e1, e2) ->
       match b with
-      | Add -> (evaluate e1) +. (evaluate e2)
-      | Sub -> (evaluate e1) -. (evaluate e2)
-      | Mul -> (evaluate e1) *. (evaluate e2)
-      | Div -> (evaluate e1) /. (evaluate e2)
-      | Pow -> (evaluate e1) ** (evaluate e2)
+      | Add -> (evaluate e1 x) +. (evaluate e2 x)
+      | Sub -> (evaluate e1 x) -. (evaluate e2 x)
+      | Mul -> (evaluate e1 x) *. (evaluate e2 x)
+      | Div -> (evaluate e1 x) /. (evaluate e2 x)
+      | Pow -> (evaluate e1 x) ** (evaluate e2 x)
  ;;
 
 
