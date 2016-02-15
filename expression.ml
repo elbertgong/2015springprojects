@@ -52,7 +52,7 @@ let rec evaluate (e:expression) (x:float) : float =
 let rec derivative (e:expression) : expression =
     match e with
     | Num _ -> Num 0.
-    | Var -> 1.
+    | Var -> Num 1.
     | Unop (u,e1) ->
         (match u with
         | Sin -> Binop(Mul,Unop(Cos, e1),derivative e1)
