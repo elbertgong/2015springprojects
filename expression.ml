@@ -100,7 +100,7 @@ let checkexp strs xval =
 let rec find_zero (e:expression) (g:float) (epsilon:float) (lim:int)
     : float option =
     if lim = 0 then None else
-    if abs (evaluate e g) <= epsilon then Some g else
+    if evaluate e g ** 2. <= epsilon ** 2. then Some g else
     find_zero e (g -. (evaluate e g /. evaluate (derivative e) g))
      epsilon (lim - 1)
 ;;
