@@ -118,4 +118,4 @@ let rec find_zero_exact (e:expression) : expression option =
 
 (*>* Problem 2.6 *>*)
 
-let minutes_spent_on_part_2 () : int = 240;;
+let minutes_spent_on_part_2 () : int = 300;;
