@@ -35,7 +35,7 @@ let rec evaluate (e:expression) (x:float) : float =
       | Sin -> sin (evaluate e1 x)
       | Cos -> cos (evaluate e1 x)
       | Ln -> log (evaluate e1 x)
-      | Neg -> -(evaluate e1 x))
+      | Neg -> -. (evaluate e1 x))
     | Binop (b, e1, e2) ->
       match b with
       | Add -> (evaluate e1 x) +. (evaluate e2 x)
@@ -101,7 +101,8 @@ let rec find_zero (e:expression) (g:float) (epsilon:float) (lim:int)
     : float option =
     if lim = 0 then None else
     if abs (evaluate e g) <= epsilon then Some g else
-    find_zero e (g -. (evaluate e g /. evaluate (derivative e) g)) epsilon (lim - 1)
+    find_zero e (g -. (evaluate e g /. evaluate (derivative e) g))
+     epsilon (lim - 1)
 ;;
 
 
