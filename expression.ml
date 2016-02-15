@@ -101,7 +101,7 @@ let rec find_zero (e:expression) (g:float) (epsilon:float) (lim:int)
     : float option =
     if lim = 0 then None else
     if abs (evaluate e g) <= epsilon then Some g else
-    find_zero e (g - (evaluate e g /. evaluate (derivate e) g) epsilon (lim - 1)
+    find_zero e (g -. (evaluate e g /. evaluate (derivative e) g)) epsilon (lim - 1)
 ;;
 
 
@@ -117,4 +117,4 @@ let rec find_zero_exact (e:expression) : expression option =
 
 (*>* Problem 2.6 *>*)
 
-let minutes_spent_on_part_2 () : int = failwith "Not implemented";;
+let minutes_spent_on_part_2 () : int = 240;;
