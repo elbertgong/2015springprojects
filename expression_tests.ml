@@ -20,15 +20,29 @@ let test () =
   assert ((evaluate (parse "4^(4*~x)") 0.2) > 0.32 &&
     (evaluate (parse "4^(4*~x)") 0.2) < 0.33);;
 
-  assert ((to_string_smart (derivative (parse "x^4 + 3"))) = "4.*x^3.");
-  assert ((to_string_smart (derivative (parse "sin(x) + cos(2*x)"))) = 
-    "cos(x)+~sin(2.*x)*2.");
-  assert ((to_string_smart (derivative (parse "ln(x - 8)"))) = "1./x");
-  assert ((to_string_smart (derivative (parse "-100"))) = "0.");
-  assert ((to_string_smart (derivative (parse "3^x"))) = "3.^x*(1*ln(3)+0.*3./3.)");
+  assert (derivative (Num 4.) = Num 0.);
+  assert (derivative (Var) = Num 1.);
+  assert (derivative (Unop(Sin, Var)) = Binop(Mul,Unop(Cos,Var),Num 1.));
+  assert (derivative (Unop(Cos, Var)) = Binop(Mul,Unop(Neg,Unop(Sin,Var)),Num 1.));
+  assert (derivative (Unop(Ln, Var)) = Binop(Div, Num 1., Var));
+  assert (derivative (Unop(Neg, Var)) = Unop(Neg, Num 1.));
+  assert (derivative (Binop(Add, Var, Num 4.)) = Binop(Add,Num 1.,Num 0.));
+  assert (derivative (Binop(Sub, Var, Num 4.)) = Binop(Sub,Num 1.,Num 0.));
+  assert (derivative (Binop(Mul, Var, Num 4.)) = Binop(Add,Binop(Mul,Var,Num 0.),
+    Binop(Mul,Num 1.,Num 4.)));
+  assert (derivative (Binop(Div, Var, Num 4.)) = 
+    Binop(Div, Binop(Sub, Binop(Mul, Num 1., Num 4.), 
+    Binop(Mul, Var, Num 0.)), Binop(Pow, Num 4., Num 2.)));
+  assert (derivative (Binop(Pow, Var, Num 4.)) = 
+    Binop(Mul, Binop(Mul, Num 4., Num 1.), 
+    Binop(Pow, Var, Binop(Sub, Num 4., Num 1.))));
+  assert (derivative (Binop(Pow, Num 4., Var)) =Binop(Mul, Binop(Pow, Num 4., Var), 
+    Binop(Add, Binop(Mul, Num 1., Unop(Ln, Num 4.)),
+    Binop(Div, Binop(Mul, Num 0., Var), Num 4.))));
 
   assert ((find_zero (parse "x^2-6*x-16") 7. 0.01 5) > Some 7.99 &&
     (find_zero (parse "x^2-6*x-16") 7. 0.01 5) < Some 8.01);
+  assert ((find_zero (parse "x^2-6*x-16") 6. 0.001 2) = None);
 
 ;;
 
