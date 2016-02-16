@@ -155,7 +155,7 @@ let mult_odds (nums:int list) : int =
 
 (*  concat : Concatenates a list of lists. See the Ocaml library ref *)
 let concat (lists:'a list list) : 'a list =
-    List.concat lists
+    List.fold_left (fun a b -> a @ b) [] lists
 ;;
 
 

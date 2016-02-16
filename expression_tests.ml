@@ -43,7 +43,6 @@ let test () =
   assert ((find_zero (parse "x^2-6*x-16") 7. 0.01 5) > Some 7.99 &&
     (find_zero (parse "x^2-6*x-16") 7. 0.01 5) < Some 8.01);
   assert ((find_zero (parse "x^2-6*x-16") 6. 0.001 2) = None);
-
 ;;
 
 
